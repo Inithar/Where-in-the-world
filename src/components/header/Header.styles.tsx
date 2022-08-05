@@ -27,13 +27,14 @@ export const Slogan = styled.h1`
   }
 `;
 
-export const ThemeButton = styled.p`
+export const ThemeButton = styled.button`
   display: flex;
   align-items: center;
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
   color: ${({ theme }) => theme.textColor};
+  cursor: pointer;
 
   ${device.tablet} {
     font-size: 16px;
