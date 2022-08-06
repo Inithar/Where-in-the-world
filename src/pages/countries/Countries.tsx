@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CountryBox } from './components/country-box/CountryBox';
+import { SearchInput } from './components/search-input/SearchInput';
 import { Wrapper } from './Countries.styles';
 
 export interface BasicCountryData {
@@ -42,6 +43,7 @@ export const Countries = () => {
 
   return (
     <Wrapper>
+      <SearchInput placeholder="Search for a country..." />
       {countriesData.map((country, index) => {
         return <CountryBox key={index} {...country} />;
       })}

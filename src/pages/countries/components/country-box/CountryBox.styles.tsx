@@ -5,8 +5,8 @@ interface FlagProps {
 }
 
 export const Wrapper = styled.div`
-  margin-bottom: 40px;
-  width: 100%;
+  margin: 0 40px 40px;
+  width: 264px;
   height: 336px;
   background-color: ${({ theme }) => theme.primaryColor};
   box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
