@@ -1,5 +1,5 @@
 import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue } from './CountryBox.styles';
-import { BasicCountryData } from '../../Countries';
+import { BasicCountryData } from '../../../../providers/CountriesDataProvider';
 
 export const CountryBox = ({ name, region, capital, flags, population }: BasicCountryData) => {
   return (
