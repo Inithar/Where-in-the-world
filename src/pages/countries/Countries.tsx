@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CountryBox } from './components/country-box/CountryBox';
+import { Wrapper } from './Countries.styles';
 
 export interface BasicCountryData {
   name: {
@@ -7,24 +8,24 @@ export interface BasicCountryData {
     nativeName: any;
     official: string;
   };
+  flags: {
+    png: string;
+    svg: string;
+  };
   region: string;
   capital: string[];
+  population: string;
 }
 
 interface CountryData extends BasicCountryData {
   borders: string[];
   currencies: any;
-  flags: {
-    png: string;
-    svg: string;
-  };
   languages: any;
-  population: string;
   subregion: string;
   tld: string[];
 }
 
-export const Home = () => {
+export const Countries = () => {
   const [countriesData, setCountriesData] = useState<CountryData[]>([]);
 
   useEffect(() => {
@@ -40,10 +41,10 @@ export const Home = () => {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       {countriesData.map((country, index) => {
         return <CountryBox key={index} {...country} />;
       })}
-    </>
+    </Wrapper>
   );
 };
