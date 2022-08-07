@@ -29,14 +29,27 @@ interface ICountryData extends IBasicCountryData {
 
 interface IContextInterface {
   filteredCountriesData: ICountryData[];
-  handleSearchBoxChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSearchValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleRegionChange: (region: string) => void;
+  currentRegion: string;
 }
 
-export const CountriesData = React.createContext<IContextInterface>({ filteredCountriesData: [], handleSearchBoxChange: () => {} });
+export const CountriesData = React.createContext<IContextInterface>({
+  filteredCountriesData: [],
+  handleSearchValueChange: () => {},
+  handleRegionChange: () => {},
+  currentRegion: 'Filter by Region',
+});
 
 export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps) => {
   const [countriesData, setCountriesData] = useState<ICountryData[]>([]);
   const [filteredCountriesData, setFilteredCountriesData] = useState<ICountryData[]>([]);
+  const [searchedValue, setSearchedValue] = useState('');
+  const [currentRegion, setCurrentRegion] = useState('Filter by Region');
+
+  const handleRegionChange = (region: string) => setCurrentRegion(region);
+
+  const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => setSearchedValue(event.target.value.toLowerCase());
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -44,20 +57,28 @@ export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps)
         'https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population'
       );
       setCountriesData(countries);
-      setFilteredCountriesData(countries);
     };
 
     fetchCountries();
   }, []);
 
-  const handleSearchBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const data = countriesData.filter((country) => {
+  useEffect(() => {
+    const filteredCountries = countriesData.filter((country) => {
       const countryName = country.name.common.toLowerCase();
-      return countryName.includes(e.target.value);
+
+      if (currentRegion === 'Filter by Region') {
+        return countryName.includes(searchedValue);
+      }
+
+      return countryName.includes(searchedValue) && country.region === currentRegion;
     });
 
-    setFilteredCountriesData(data);
-  };
+    setFilteredCountriesData(filteredCountries);
+  }, [currentRegion, searchedValue, countriesData]);
 
-  return <CountriesData.Provider value={{ filteredCountriesData, handleSearchBoxChange }}>{children}</CountriesData.Provider>;
+  return (
+    <CountriesData.Provider value={{ filteredCountriesData, handleSearchValueChange, handleRegionChange, currentRegion }}>
+      {children}
+    </CountriesData.Provider>
+  );
 };

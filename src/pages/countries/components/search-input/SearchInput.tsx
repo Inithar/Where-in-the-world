@@ -7,12 +7,12 @@ interface ISearchInputProps {
 }
 
 export const SearchInput = ({ placeholder }: ISearchInputProps) => {
-  const { handleSearchBoxChange } = useContext(CountriesData);
+  const { handleSearchValueChange } = useContext(CountriesData);
 
   return (
     <SearchBox>
       <Icon />
-      <Input placeholder={placeholder} onChange={handleSearchBoxChange} />
+      <Input placeholder={placeholder} onChange={handleSearchValueChange} />
     </SearchBox>
   );
 };
