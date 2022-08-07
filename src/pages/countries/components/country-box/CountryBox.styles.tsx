@@ -1,27 +1,21 @@
 import styled from 'styled-components';
-
-interface FlagProps {
+interface IFlagProps {
   src: string;
 }
 
 export const Wrapper = styled.div`
-  margin: 0 40px 40px;
   width: 264px;
   height: 336px;
   background-color: ${({ theme }) => theme.primaryColor};
   box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.03);
   border-radius: 5px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `;
 
 export const CountryData = styled.div`
   padding: 24px 0 46px 24px;
 `;
 
-export const Flag = styled.img.attrs(({ src }) => ({ src }))<FlagProps>`
+export const Flag = styled.img.attrs(({ src }) => ({ src }))<IFlagProps>`
   width: 264px;
   height: 160px;
   border-top-left-radius: 5px;

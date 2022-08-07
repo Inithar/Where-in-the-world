@@ -1,7 +1,7 @@
 import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue } from './CountryBox.styles';
-import { BasicCountryData } from '../../../../providers/CountriesDataProvider';
+import { IBasicCountryData } from '../../../../providers/CountriesDataProvider';
 
-export const CountryBox = ({ name, region, capital, flags, population }: BasicCountryData) => {
+export const CountryBox = ({ name, region, capital, flags, population }: IBasicCountryData) => {
   return (
     <Wrapper>
       <Flag src={flags.png} />

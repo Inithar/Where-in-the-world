@@ -1,10 +1,10 @@
 import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
-
-interface Props {
+import { getData } from '../utils/data';
+interface ICountriesDataProviderProps {
   children: ReactNode;
 }
 
-export interface BasicCountryData {
+export interface IBasicCountryData {
   name: {
     common: string;
     nativeName: any;
@@ -19,7 +19,7 @@ export interface BasicCountryData {
   population: string;
 }
 
-interface CountryData extends BasicCountryData {
+interface ICountryData extends IBasicCountryData {
   borders: string[];
   currencies: any;
   languages: any;
@@ -27,29 +27,27 @@ interface CountryData extends BasicCountryData {
   tld: string[];
 }
 
-interface ContextInterface {
-  chosenCountriesData: CountryData[];
+interface IContextInterface {
+  filteredCountriesData: ICountryData[];
   handleSearchBoxChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const CountriesData = React.createContext<ContextInterface>({ chosenCountriesData: [], handleSearchBoxChange: () => {} });
+export const CountriesData = React.createContext<IContextInterface>({ filteredCountriesData: [], handleSearchBoxChange: () => {} });
 
-export const CountriesDataProvider = ({ children }: Props) => {
-  const [countriesData, setCountriesData] = useState<CountryData[]>([]);
-  const [chosenCountriesData, setChosenCountriesData] = useState<CountryData[]>([]);
+export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps) => {
+  const [countriesData, setCountriesData] = useState<ICountryData[]>([]);
+  const [filteredCountriesData, setFilteredCountriesData] = useState<ICountryData[]>([]);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(
-        `https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population `
+    const fetchCountries = async () => {
+      const countries = await getData<ICountryData[]>(
+        'https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population'
       );
-      const data = await response.json();
-      setCountriesData(data);
-      setChosenCountriesData(data);
+      setCountriesData(countries);
+      setFilteredCountriesData(countries);
     };
 
-    console.log('raz');
-    getData();
+    fetchCountries();
   }, []);
 
   const handleSearchBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,8 +56,8 @@ export const CountriesDataProvider = ({ children }: Props) => {
       return countryName.includes(e.target.value);
     });
 
-    setChosenCountriesData(data);
+    setFilteredCountriesData(data);
   };
 
-  return <CountriesData.Provider value={{ chosenCountriesData, handleSearchBoxChange }}>{children}</CountriesData.Provider>;
+  return <CountriesData.Provider value={{ filteredCountriesData, handleSearchBoxChange }}>{children}</CountriesData.Provider>;
 };

@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { CountriesData } from '../../../../providers/CountriesDataProvider';
 import { Icon, Input, SearchBox } from './SearchInput.styles';
 
-interface SearchInputProps {
+interface ISearchInputProps {
   placeholder: string;
 }
 
-export const SearchInput = ({ placeholder }: SearchInputProps) => {
+export const SearchInput = ({ placeholder }: ISearchInputProps) => {
   const { handleSearchBoxChange } = useContext(CountriesData);
 
   return (

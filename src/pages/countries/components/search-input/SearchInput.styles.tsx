@@ -13,6 +13,7 @@ export const SearchBox = styled.div`
 `;
 
 export const Input = styled.input`
+  width: 100%;
   font-size: 12px;
   line-height: 20px;
   color: ${({ theme }) => theme.inputTextColor};

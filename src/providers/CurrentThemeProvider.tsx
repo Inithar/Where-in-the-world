@@ -1,17 +1,17 @@
 import React, { ReactNode, useState } from 'react';
 
-interface ContextInterface {
+interface IContextInterface {
   currentTheme: string;
   handleThemeChange: () => void;
 }
 
-interface Props {
+interface ICurrentThemeProviderProps {
   children: ReactNode;
 }
 
-export const CurrentTheme = React.createContext<ContextInterface>({ currentTheme: 'lightTheme', handleThemeChange: () => {} });
+export const CurrentTheme = React.createContext<IContextInterface>({ currentTheme: 'lightTheme', handleThemeChange: () => {} });
 
-export const CurrentThemeProvider = ({ children }: Props) => {
+export const CurrentThemeProvider = ({ children }: ICurrentThemeProviderProps) => {
   const [currentTheme, setCurrentTheme] = useState('lightTheme');
 
   const handleThemeChange = () => {

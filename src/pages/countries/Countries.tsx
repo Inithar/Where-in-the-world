@@ -1,18 +1,23 @@
 import React, { useContext } from 'react';
+import { DefaultContainer } from '../../components/default-container/DefaultContainer';
 import { CountriesData } from '../../providers/CountriesDataProvider';
 import { CountryBox } from './components/country-box/CountryBox';
 import { SearchInput } from './components/search-input/SearchInput';
-import { Wrapper } from './Countries.styles';
+import { CountriesContainer, Wrapper } from './Countries.styles';
 
 export const Countries = () => {
-  const { chosenCountriesData } = useContext(CountriesData);
+  const { filteredCountriesData } = useContext(CountriesData);
 
   return (
     <Wrapper>
-      <SearchInput placeholder="Search for a country..." />
-      {chosenCountriesData.map((country, index) => {
-        return <CountryBox key={index} {...country} />;
-      })}
+      <DefaultContainer>
+        <SearchInput placeholder="Search for a country..." />
+        <CountriesContainer>
+          {filteredCountriesData.map((country, index) => {
+            return <CountryBox key={index} {...country} />;
+          })}
+        </CountriesContainer>
+      </DefaultContainer>
     </Wrapper>
   );
 };

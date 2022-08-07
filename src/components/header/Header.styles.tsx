@@ -14,6 +14,10 @@ export const Container = styled(DefaultContainer)`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+
+  ${device.smallDesktop} {
+    padding: 0 80px;
+  }
 `;
 
 export const Slogan = styled.h1`
