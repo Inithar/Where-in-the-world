@@ -2,9 +2,11 @@ import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue } from
 import { IBasicCountryData } from '../../../../providers/CountriesDataProvider';
 import { Link } from 'react-router-dom';
 
-export const CountryBox = ({ name, region, capital, flags, population }: IBasicCountryData) => {
+export const CountryBox = (country: IBasicCountryData) => {
+  const { name, region, capital, flags, population } = country;
+
   return (
-    <Link to={name.common}>
+    <Link to={name.common} state={country}>
       <Wrapper>
         <Flag src={flags.png} />
         <CountryData>

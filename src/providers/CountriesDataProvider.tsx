@@ -19,7 +19,7 @@ export interface IBasicCountryData {
   population: string;
 }
 
-interface ICountryData extends IBasicCountryData {
+export interface ICountryData extends IBasicCountryData {
   borders: string[];
   currencies: any;
   languages: any;
@@ -31,7 +31,6 @@ interface IContextInterface {
   filteredCountriesData: ICountryData[];
   handleSearchValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleRegionChange: (region: string) => void;
-  getCountryData: (region: string) => ICountryData | undefined;
   currentRegion: string;
 }
 
@@ -39,9 +38,6 @@ export const CountriesData = React.createContext<IContextInterface>({
   filteredCountriesData: [],
   handleSearchValueChange: () => {},
   handleRegionChange: () => {},
-  getCountryData: () => {
-    return undefined;
-  },
   currentRegion: 'Filter by Region',
 });
 
@@ -80,12 +76,8 @@ export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps)
     setFilteredCountriesData(filteredCountries);
   }, [currentRegion, searchedValue, countriesData]);
 
-  const getCountryData = (country: string) => {
-    return countriesData.find((countryData) => countryData.name.common === country);
-  };
-
   return (
-    <CountriesData.Provider value={{ filteredCountriesData, handleSearchValueChange, handleRegionChange, getCountryData, currentRegion }}>
+    <CountriesData.Provider value={{ filteredCountriesData, handleSearchValueChange, handleRegionChange, currentRegion }}>
       {children}
     </CountriesData.Provider>
   );

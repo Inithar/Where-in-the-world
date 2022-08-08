@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { CountriesData } from '../../providers/CountriesDataProvider';
+import { useLocation } from 'react-router-dom';
+import { ICountryData } from '../../providers/CountriesDataProvider';
 
 export const Country = () => {
-  const { getCountryData } = useContext(CountriesData);
-  const { country } = useParams();
-  const data = country ? getCountryData(country) : null;
+  const { state } = useLocation();
+  const { borders } = state as ICountryData;
 
-  return <div>{data && <div>{data.capital}</div>}</div>;
+  return (
+    <div>
+      <div>{borders[0]}</div>
+    </div>
+  );
 };
