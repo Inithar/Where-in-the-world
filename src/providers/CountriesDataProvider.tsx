@@ -46,7 +46,7 @@ export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps)
   const [filteredCountriesData, setFilteredCountriesData] = useState<ICountryData[]>([]);
   const [searchedValue, setSearchedValue] = useState('');
   const [currentRegion, setCurrentRegion] = useState('Filter by Region');
-
+  
   const handleRegionChange = (region: string) => setCurrentRegion(region);
 
   const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => setSearchedValue(event.target.value.toLowerCase());
