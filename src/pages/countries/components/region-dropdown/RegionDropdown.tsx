@@ -4,7 +4,7 @@ import { ArrowIcon, Button, Content, Dropdown, Item } from './RegionDropdown.sty
 
 export const RegionDropdown = () => {
   const [isActive, setIsActive] = useState(false);
-  const { handleRegionChange, currentRegion } = useContext(CountriesData);
+  const { handleRegionChange, filteredCountries } = useContext(CountriesData);
 
   const handleOpenDropdown = (event: MouseEvent<HTMLDivElement>) => setIsActive(!isActive);
   const handleOptionClick = (event: MouseEvent<HTMLDivElement>, option: string) => {
@@ -16,7 +16,7 @@ export const RegionDropdown = () => {
   return (
     <Dropdown>
       <Button onClick={handleOpenDropdown}>
-        {currentRegion}
+        {filteredCountries.region}
         <ArrowIcon />
       </Button>
       {isActive && (

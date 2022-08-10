@@ -7,15 +7,15 @@ import { SearchInput } from './components/search-input/SearchInput';
 import { CountriesContainer, Wrapper } from './Countries.styles';
 
 export const Countries = () => {
-  const { filteredCountriesData } = useContext(CountriesData);
-
+  const { filteredCountries } = useContext(CountriesData);
+  const { countries } = filteredCountries;
   return (
     <Wrapper>
       <DefaultContainer>
         <SearchInput placeholder="Search for a country..." />
         <RegionDropdown />
         <CountriesContainer>
-          {filteredCountriesData.map((country, index) => {
+          {countries.map((country, index) => {
             return <CountryBox key={index} {...country} />;
           })}
         </CountriesContainer>

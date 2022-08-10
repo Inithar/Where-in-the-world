@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
+import React, { ReactNode, useState, useEffect, ChangeEvent, useReducer } from 'react';
 import { getData } from '../utils/data';
 interface ICountriesDataProviderProps {
   children: ReactNode;
@@ -28,28 +28,74 @@ export interface ICountryData extends IBasicCountryData {
 }
 
 interface IContextInterface {
-  filteredCountriesData: ICountryData[];
+  filteredCountries: ICountriesInitialState;
   handleSearchValueChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleRegionChange: (region: string) => void;
-  currentRegion: string;
 }
 
+interface ICountriesInitialState {
+  countries: ICountryData[];
+  searchedCountry: string;
+  region: string;
+}
+
+type CountriesActionType =
+  | { type: 'SET COUNTRIES'; payload: ICountryData[] }
+  | { type: 'SEARCHED COUNTRY CHANGE'; payload: string }
+  | { type: 'REGION CHANGE'; payload: string };
+
+const countriesInitialState: ICountriesInitialState = {
+  countries: [],
+  searchedCountry: '',
+  region: 'Filter by Region',
+};
+
 export const CountriesData = React.createContext<IContextInterface>({
-  filteredCountriesData: [],
+  filteredCountries: countriesInitialState,
   handleSearchValueChange: () => {},
   handleRegionChange: () => {},
-  currentRegion: 'Filter by Region',
 });
+
+const countriesReducer = (state: ICountriesInitialState, action: CountriesActionType) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case 'SET COUNTRIES':
+      return {
+        ...state,
+        countries: payload,
+      };
+    case 'SEARCHED COUNTRY CHANGE':
+      return {
+        ...state,
+        searchedCountry: payload,
+      };
+    case 'REGION CHANGE':
+      return {
+        ...state,
+        region: payload,
+      };
+    default:
+      return state;
+  }
+};
 
 export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps) => {
   const [countriesData, setCountriesData] = useState<ICountryData[]>([]);
-  const [filteredCountriesData, setFilteredCountriesData] = useState<ICountryData[]>([]);
-  const [searchedValue, setSearchedValue] = useState('');
-  const [currentRegion, setCurrentRegion] = useState('Filter by Region');
-  
-  const handleRegionChange = (region: string) => setCurrentRegion(region);
+  const [filteredCountries, dispatch] = useReducer(countriesReducer, countriesInitialState);
+  const { searchedCountry, region } = filteredCountries;
 
-  const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => setSearchedValue(event.target.value.toLowerCase());
+  const handleRegionChange = (region: string) =>
+    dispatch({
+      type: 'REGION CHANGE',
+      payload: region,
+    });
+
+  const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) =>
+    dispatch({
+      type: 'SEARCHED COUNTRY CHANGE',
+      payload: event.target.value.toLowerCase(),
+    });
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -63,22 +109,18 @@ export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps)
   }, []);
 
   useEffect(() => {
-    const filteredCountries = countriesData.filter((country) => {
+    const filteredCountriesData = countriesData.filter((country) => {
       const countryName = country.name.common.toLowerCase();
 
-      if (currentRegion === 'Filter by Region') {
-        return countryName.includes(searchedValue);
+      if (region === 'Filter by Region') {
+        return countryName.includes(searchedCountry);
       }
 
-      return countryName.includes(searchedValue) && country.region === currentRegion;
+      return countryName.includes(searchedCountry) && country.region === region;
     });
 
-    setFilteredCountriesData(filteredCountries);
-  }, [currentRegion, searchedValue, countriesData]);
+    dispatch({ type: 'SET COUNTRIES', payload: filteredCountriesData });
+  }, [countriesData, region, searchedCountry]);
 
-  return (
-    <CountriesData.Provider value={{ filteredCountriesData, handleSearchValueChange, handleRegionChange, currentRegion }}>
-      {children}
-    </CountriesData.Provider>
-  );
+  return <CountriesData.Provider value={{ filteredCountries, handleSearchValueChange, handleRegionChange }}>{children}</CountriesData.Provider>;
 };
