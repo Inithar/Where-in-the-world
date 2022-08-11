@@ -98,14 +98,20 @@ export const CountriesDataProvider = ({ children }: ICountriesDataProviderProps)
     });
 
   useEffect(() => {
+    let isCancelled = false;
+
     const fetchCountries = async () => {
       const countries = await getData<ICountryData[]>(
         'https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population'
       );
-      setCountriesData(countries);
+      if (!isCancelled) setCountriesData(countries);
     };
 
     fetchCountries();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   useEffect(() => {
