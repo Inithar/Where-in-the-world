@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 interface IFlagProps {
   src: string;
@@ -44,4 +45,8 @@ export const Property = styled.p`
 
 export const PropertyValue = styled.span`
   font-weight: 300;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

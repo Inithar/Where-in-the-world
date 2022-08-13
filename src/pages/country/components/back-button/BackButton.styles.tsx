@@ -16,6 +16,14 @@ export const Button = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
+  transition: filter 0.2s;
+
+  &:hover {
+    color: ${({ theme }) => theme.textColor};
+    background-color: ${({ theme }) => theme.primaryColor};
+    filter: brightness(1.1);
+    cursor: pointer;
+  }
 
   ${device.tablet} {
     margin-bottom: 100px;

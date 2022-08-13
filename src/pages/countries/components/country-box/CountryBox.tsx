@@ -1,12 +1,11 @@
-import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue } from './CountryBox.styles';
+import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue, StyledLink } from './CountryBox.styles';
 import { IBasicCountryData } from '../../../../providers/CountriesDataProvider';
-import { Link } from 'react-router-dom';
 
 export const CountryBox = (country: IBasicCountryData) => {
   const { name, region, capital, flags, population } = country;
 
   return (
-    <Link to={name.common} state={country}>
+    <StyledLink to={name.common} state={country}>
       <Wrapper>
         <Flag src={flags.png} />
         <CountryData>
@@ -22,6 +21,6 @@ export const CountryBox = (country: IBasicCountryData) => {
           </Property>
         </CountryData>
       </Wrapper>
-    </Link>
+    </StyledLink>
   );
 };
