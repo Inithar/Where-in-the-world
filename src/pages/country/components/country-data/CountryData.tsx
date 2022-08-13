@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ICountryData } from '../../../../providers/CountriesDataProvider';
-import { DataContainer, CountryName, DataSection, Property, PropertyValue } from './CountryData.styles';
+import { DataContainer, CountryName, DataSection, Property, PropertyValue, DataSectionsContainer } from './CountryData.styles';
 
 interface ICountryDataProps {
   data: ICountryData;
@@ -35,34 +35,36 @@ export const CountryData = ({ data }: ICountryDataProps) => {
   return (
     <DataContainer>
       <CountryName>{name.common}</CountryName>
-      <DataSection marginTop="16px">
-        <Property>
-          Native Name: <PropertyValue>{NativeNameValue}</PropertyValue>
-        </Property>
-        <Property>
-          Population: <PropertyValue>{population}</PropertyValue>
-        </Property>
-        <Property>
-          Region: <PropertyValue>{region}</PropertyValue>
-        </Property>
-        <Property>
-          SubRegion: <PropertyValue>{subregion}</PropertyValue>
-        </Property>
-        <Property>
-          Capital: <PropertyValue>{capital[0]}</PropertyValue>
-        </Property>
-      </DataSection>
-      <DataSection marginTop="32px">
-        <Property>
-          Top Level Domain: <PropertyValue>{tld.join(', ')}</PropertyValue>
-        </Property>
-        <Property>
-          Currencies: <PropertyValue>{currenciesValue}</PropertyValue>
-        </Property>
-        <Property>
-          Languages: <PropertyValue>{languagesValue}</PropertyValue>
-        </Property>
-      </DataSection>
+      <DataSectionsContainer>
+        <DataSection marginTop="16px" isLeftSection>
+          <Property>
+            Native Name: <PropertyValue>{NativeNameValue}</PropertyValue>
+          </Property>
+          <Property>
+            Population: <PropertyValue>{population}</PropertyValue>
+          </Property>
+          <Property>
+            Region: <PropertyValue>{region}</PropertyValue>
+          </Property>
+          <Property>
+            SubRegion: <PropertyValue>{subregion}</PropertyValue>
+          </Property>
+          <Property>
+            Capital: <PropertyValue>{capital[0]}</PropertyValue>
+          </Property>
+        </DataSection>
+        <DataSection marginTop="32px" isRightSection>
+          <Property>
+            Top Level Domain: <PropertyValue>{tld.join(', ')}</PropertyValue>
+          </Property>
+          <Property>
+            Currencies: <PropertyValue>{currenciesValue}</PropertyValue>
+          </Property>
+          <Property>
+            Languages: <PropertyValue>{languagesValue}</PropertyValue>
+          </Property>
+        </DataSection>
+      </DataSectionsContainer>
     </DataContainer>
   );
 };
