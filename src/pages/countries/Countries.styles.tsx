@@ -3,6 +3,7 @@ import { device } from '../../styles/responsive';
 
 export const Wrapper = styled.div`
   padding: 24px 0 65px;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
