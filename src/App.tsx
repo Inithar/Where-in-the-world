@@ -5,8 +5,8 @@ import { Countries } from './pages/countries/Countries';
 import { Country } from './pages/country/Country';
 import { NotFound } from './pages/not-found/NotFound';
 import { CountriesDataProvider } from './providers/CountriesDataProvider';
-import GlobalStyle from './styles/global-styles';
 import { darkTheme } from './styles/theme';
+import GlobalStyle from './styles/global-styles';
 
 function App() {
   return (
