@@ -4,6 +4,8 @@ import { IBasicCountryData } from '../../../../redux/countriesApiSlice';
 export const CountryBox = (country: IBasicCountryData) => {
   const { name, region, capital, flags, population } = country;
 
+  console.log(country);
+
   return (
     <StyledLink to={name.common} state={country}>
       <Wrapper>

@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
-import { CurrentTheme } from '../../providers/CurrentThemeProvider';
+import { Dispatch } from 'react';
 import { Wrapper, Slogan, ThemeButton, Icon, Container } from './Header.styles';
 
-export const Header = () => {
-  const { handleThemeChange } = useContext(CurrentTheme);
+interface IHeaderProps {
+  currentTheme: string;
+  setCurrentTheme: Dispatch<React.SetStateAction<string>>;
+}
+
+export const Header = ({ currentTheme, setCurrentTheme }: IHeaderProps) => {
+  const handleThemeChange = () => {
+    currentTheme === 'darkTheme' ? setCurrentTheme('lightTheme') : setCurrentTheme('darkTheme');
+  };
 
   return (
     <Wrapper>

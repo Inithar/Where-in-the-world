@@ -5,9 +5,10 @@ import { setSearchedCountry } from '../../../../redux/filteredCountriesSlice';
 
 interface ISearchInputProps {
   placeholder: string;
+  value: string;
 }
 
-export const SearchInput = ({ placeholder }: ISearchInputProps) => {
+export const SearchInput = ({ placeholder, value }: ISearchInputProps) => {
   const dispatch = useAppDispatch();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +19,7 @@ export const SearchInput = ({ placeholder }: ISearchInputProps) => {
   return (
     <SearchBox>
       <Icon />
-      <Input placeholder={placeholder} onChange={handleInputChange} />
+      <Input placeholder={placeholder} onChange={handleInputChange} value={value} />
     </SearchBox>
   );
 };

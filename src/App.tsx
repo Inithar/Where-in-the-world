@@ -4,15 +4,18 @@ import { MainTemplate } from './layouts/MainTemplate';
 import { Countries } from './pages/countries/Countries';
 import { Country } from './pages/country/Country';
 import { NotFound } from './pages/not-found/NotFound';
-import { darkTheme } from './styles/theme';
+import { darkTheme, lightTheme } from './styles/theme';
 import GlobalStyle from './styles/global-styles';
+import { useState } from 'react';
 
 function App() {
+  const [currentTheme, setCurrentTheme] = useState('darkTheme');
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={currentTheme === 'darkTheme' ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Routes>
-        <Route path="countries" element={<MainTemplate />}>
+        <Route path="countries" element={<MainTemplate currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />}>
           <Route index element={<Countries />} />
           <Route path=":country" element={<Country />} />
         </Route>

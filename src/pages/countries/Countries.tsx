@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { DefaultContainer } from '../../components/default-container/DefaultContainer';
 import { CountryBox } from './components/country-box/CountryBox';
 import { RegionDropdown } from './components/region-dropdown/RegionDropdown';
@@ -7,7 +8,6 @@ import { useGetCountriesQuery } from '../../redux/countriesApiSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setCountries } from '../../redux/filteredCountriesSlice';
-import { useEffect } from 'react';
 import { LoadingSpinner } from '../../components/loading-spinner/LoadingSpinner';
 
 export const Countries = () => {
@@ -16,6 +16,8 @@ export const Countries = () => {
   const filteredCountriesData = useAppSelector(({ filteredCountries }) => filteredCountries);
 
   const { countries, region, searchedCountry } = filteredCountriesData;
+
+  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -36,7 +38,7 @@ export const Countries = () => {
   return (
     <Wrapper>
       <DefaultContainer>
-        <SearchInput placeholder="Search for a country..." />
+        <SearchInput placeholder="Search for a country..." value={searchedCountry} />
         <RegionDropdown />
         <CountriesContainer>
           {isLoading ? (

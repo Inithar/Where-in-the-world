@@ -12,7 +12,7 @@ export interface IBasicCountryData {
   };
   region: string;
   capital: string[];
-  population: string;
+  population: number;
 }
 
 export interface ICountryData extends IBasicCountryData {
@@ -26,7 +26,7 @@ export interface ICountryData extends IBasicCountryData {
 export const countriesApi = createApi({
   reducerPath: 'countriesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population',
+    baseUrl: 'https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,tld,borders,flags,population,',
   }),
   endpoints: (builder) => ({
     getCountries: builder.query<ICountryData[], void>({
