@@ -1,14 +1,14 @@
-import { Dispatch } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { setTheme } from '../../redux/themeSlice';
 import { Wrapper, Slogan, ThemeButton, Icon, Container } from './Header.styles';
 
-interface IHeaderProps {
-  currentTheme: string;
-  setCurrentTheme: Dispatch<React.SetStateAction<string>>;
-}
+export const Header = () => {
+  const theme = useAppSelector(({ theme }) => theme.theme);
+  const dispatch = useAppDispatch();
 
-export const Header = ({ currentTheme, setCurrentTheme }: IHeaderProps) => {
   const handleThemeChange = () => {
-    currentTheme === 'darkTheme' ? setCurrentTheme('lightTheme') : setCurrentTheme('darkTheme');
+    theme === 'dark theme' ? dispatch(setTheme('light theme')) : dispatch(setTheme('dark theme'));
   };
 
   return (

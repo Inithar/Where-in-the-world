@@ -17,8 +17,6 @@ export const Countries = () => {
 
   const { countries, region, searchedCountry } = filteredCountriesData;
 
-  console.log(data);
-
   useEffect(() => {
     if (data) {
       const filteredCountries = data.filter((country) => {
