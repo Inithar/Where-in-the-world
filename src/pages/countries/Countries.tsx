@@ -8,6 +8,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setCountries } from '../../redux/filteredCountriesSlice';
 import { useEffect } from 'react';
+import { LoadingSpinner } from '../../components/loading-spinner/LoadingSpinner';
 
 export const Countries = () => {
   const { data, isLoading } = useGetCountriesQuery();
@@ -39,7 +40,7 @@ export const Countries = () => {
         <RegionDropdown />
         <CountriesContainer>
           {isLoading ? (
-            <h1>Loading</h1>
+            <LoadingSpinner />
           ) : (
             countries.map((country, index) => {
               return <CountryBox key={index} {...country} />;
