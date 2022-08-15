@@ -1,14 +1,11 @@
-import React from 'react';
-import { ICountryData } from '../../../../providers/CountriesDataProvider';
+import { ICountryData } from '../../../../redux/countriesApiSlice';
 import { BorderCountry, BordersContainer, Header, Message, Wrapper } from './CountryBorders.style';
-
 interface ICountryBordersProps {
   data: ICountryData;
 }
 
 export const CountryBorders = ({ data }: ICountryBordersProps) => {
   const { borders } = data;
-  console.log(borders);
 
   return (
     <Wrapper>

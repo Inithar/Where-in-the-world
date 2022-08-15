@@ -1,18 +1,24 @@
-import React, { useContext } from 'react';
-import { CountriesData } from '../../../../providers/CountriesDataProvider';
+import React, { ChangeEvent } from 'react';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { Icon, Input, SearchBox } from './SearchInput.styles';
+import { setSearchedCountry } from '../../../../redux/filteredCountriesSlice';
 
 interface ISearchInputProps {
   placeholder: string;
 }
 
 export const SearchInput = ({ placeholder }: ISearchInputProps) => {
-  const { handleSearchValueChange } = useContext(CountriesData);
+  const dispatch = useAppDispatch();
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.toLowerCase();
+    dispatch(setSearchedCountry(value));
+  };
 
   return (
     <SearchBox>
       <Icon />
-      <Input placeholder={placeholder} onChange={handleSearchValueChange} />
+      <Input placeholder={placeholder} onChange={handleInputChange} />
     </SearchBox>
   );
 };

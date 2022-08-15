@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { ICountryData } from '../../../../providers/CountriesDataProvider';
+import { useMemo } from 'react';
+import { ICountryData } from '../../../../redux/countriesApiSlice';
 import { DataContainer, CountryName, DataSection, Property, PropertyValue, DataSectionsContainer } from './CountryData.styles';
 
 interface ICountryDataProps {

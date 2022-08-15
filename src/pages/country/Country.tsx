@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { DefaultContainer } from '../../components/default-container/DefaultContainer';
-import { ICountryData } from '../../providers/CountriesDataProvider';
+import { ICountryData } from '../../redux/countriesApiSlice';
 import { BackButton } from './components/back-button/BackButton';
 import { CountryBorders } from './components/country-borders/CountryBorders';
 import { CountryData } from './components/country-data/CountryData';

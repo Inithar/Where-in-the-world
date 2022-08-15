@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { countriesApi } from './countries';
+import { countriesApi } from './countriesApiSlice';
+import filteredCountriesReducer from './filteredCountriesSlice';
 
 export const store = configureStore({
   reducer: {
     [countriesApi.reducerPath]: countriesApi.reducer,
+    filteredCountries: filteredCountriesReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(countriesApi.middleware),
 });

@@ -1,5 +1,5 @@
 import { CountryName, CountryData, Flag, Wrapper, Property, PropertyValue, StyledLink } from './CountryBox.styles';
-import { IBasicCountryData } from '../../../../providers/CountriesDataProvider';
+import { IBasicCountryData } from '../../../../redux/countriesApiSlice';
 
 export const CountryBox = (country: IBasicCountryData) => {
   const { name, region, capital, flags, population } = country;
