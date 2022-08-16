@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import search from '../../../../assets/icons/search.svg';
+import { device } from '../../../../styles/responsive';
 
 export const SearchBox = styled.div`
   display: flex;
@@ -10,6 +11,15 @@ export const SearchBox = styled.div`
   background-color: ${({ theme }) => theme.primaryColor};
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
   border-radius: 5px;
+
+  ${device.tablet} {
+    margin: 24px auto 48px 0;
+    width: 380px;
+  }
+
+  ${device.smallDesktop} {
+    width: 480px;
+  }
 `;
 
 export const Input = styled.input`

@@ -3,7 +3,7 @@ import { DefaultContainer } from '../../components/default-container/DefaultCont
 import { CountryBox } from './components/country-box/CountryBox';
 import { RegionDropdown } from './components/region-dropdown/RegionDropdown';
 import { SearchInput } from './components/search-input/SearchInput';
-import { CountriesContainer, Wrapper } from './Countries.styles';
+import { CountriesContainer, FilteringElementsContainer, Wrapper } from './Countries.styles';
 import { useGetCountriesQuery } from '../../redux/countriesApiSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -36,8 +36,10 @@ export const Countries = () => {
   return (
     <Wrapper>
       <DefaultContainer>
-        <SearchInput placeholder="Search for a country..." value={searchedCountry} />
-        <RegionDropdown />
+        <FilteringElementsContainer>
+          <SearchInput placeholder="Search for a country..." value={searchedCountry} />
+          <RegionDropdown />
+        </FilteringElementsContainer>
         <CountriesContainer>
           {isLoading ? (
             <LoadingSpinner />

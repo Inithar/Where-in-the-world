@@ -17,3 +17,9 @@ export const CountriesContainer = styled.div`
     gap: 75px;
   }
 `;
+
+export const FilteringElementsContainer = styled.div`
+  ${device.tablet} {
+    display: flex;
+  }
+`;

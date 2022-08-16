@@ -10,6 +10,7 @@ const RoundedContainer = styled.div`
 
 export const Dropdown = styled.div`
   position: relative;
+  margin-top: 24px;
   width: 200px;
 `;
 
