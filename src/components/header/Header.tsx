@@ -16,7 +16,7 @@ export const Header = () => {
       <Container>
         <Slogan>Where in the world?</Slogan>
         <ThemeButton onClick={handleThemeChange}>
-          <Icon />
+          <Icon currentTheme={theme} />
           Dark Mode
         </ThemeButton>
       </Container>

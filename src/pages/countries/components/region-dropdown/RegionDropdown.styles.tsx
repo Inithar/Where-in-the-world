@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import arrow from '../../../../assets/icons/arrow.svg';
+import arrowLight from '../../../../assets/icons/arrow-light.svg';
+import arrowDark from '../../../../assets/icons/arrow-dark.svg';
+
+interface IArrowIconProps {
+  currentTheme: string;
+}
 
 const RoundedContainer = styled.div`
   color: ${({ theme }) => theme.textColor};
@@ -27,7 +32,9 @@ export const Button = styled(RoundedContainer)`
   user-select: none;
 `;
 
-export const ArrowIcon = styled.img.attrs({ src: arrow })`
+export const ArrowIcon = styled.img.attrs<IArrowIconProps>(({ currentTheme }) => ({
+  src: currentTheme === 'dark theme' ? arrowLight : arrowDark,
+}))<IArrowIconProps>`
   width: 10px;
   height: 10px;
 `;

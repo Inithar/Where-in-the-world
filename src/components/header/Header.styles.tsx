@@ -1,7 +1,12 @@
 import styled from 'styled-components';
-import moon from '../../assets/icons/moon.svg';
+import moonLight from '../../assets/icons/moon-light.svg';
+import moonDark from '../../assets/icons/moon-dark.svg';
 import { device } from '../../styles/responsive';
 import { DefaultContainer } from '../default-container/DefaultContainer';
+
+interface IIconProps {
+  currentTheme: string;
+}
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -41,15 +46,20 @@ export const ThemeButton = styled.button`
   color: ${({ theme }) => theme.textColor};
   cursor: pointer;
 
+  &:focus,
+  &:hover {
+    color: ${({ theme }) => theme.textColor};
+  }
+
   ${device.tablet} {
     font-size: 16px;
     line-height: 22px;
   }
 `;
 
-export const Icon = styled.img.attrs({
-  src: moon,
-})`
+export const Icon = styled.img.attrs<IIconProps>(({ currentTheme }) => ({
+  src: currentTheme === 'dark theme' ? moonLight : moonDark,
+}))<IIconProps>`
   margin-right: 10px;
   margin-bottom: 3px;
   width: 16px;

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
-import arrow from '../../../../assets/icons/left-arrow.svg';
+import arrowLight from '../../../../assets/icons/left-arrow-light.svg';
+import arrowDark from '../../../../assets/icons/left-arrow-dark.svg';
 import { device } from '../../../../styles/responsive';
+
+interface IArrowIconProps {
+  currentTheme: string;
+}
 
 export const Button = styled.button`
   display: flex;
@@ -30,8 +35,8 @@ export const Button = styled.button`
   }
 `;
 
-export const ArrowIcon = styled.img.attrs({
-  src: arrow,
-})`
+export const ArrowIcon = styled.img.attrs<IArrowIconProps>(({ currentTheme }) => ({
+  src: currentTheme === 'dark theme' ? arrowLight : arrowDark,
+}))<IArrowIconProps>`
   margin-right: 10px;
 `;

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import search from '../../../../assets/icons/search.svg';
+import searchLight from '../../../../assets/icons/search-light.svg';
+import searchDark from '../../../../assets/icons/search-dark.svg';
 import { device } from '../../../../styles/responsive';
+interface IIconProps {
+  currentTheme: string;
+}
 
 export const SearchBox = styled.div`
   display: flex;
@@ -34,6 +38,8 @@ export const Input = styled.input`
   }
 `;
 
-export const Icon = styled.img.attrs({ src: search })`
+export const Icon = styled.img.attrs<IIconProps>(({ currentTheme }) => ({
+  src: currentTheme === 'dark theme' ? searchLight : searchDark,
+}))<IIconProps>`
   padding: 16px 26px 16px 32px;
 `;

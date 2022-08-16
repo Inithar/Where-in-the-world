@@ -6,7 +6,7 @@ export const Loader = styled.div`
   font-size: 20px;
   width: 1em;
   height: 1em;
-  color: #ffffff;
+  color: ${({ theme }) => theme.textColor};
   border-radius: 50%;
   transform: translateZ(0);
   text-indent: -9999em;

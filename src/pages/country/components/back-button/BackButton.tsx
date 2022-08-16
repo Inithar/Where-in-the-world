@@ -1,8 +1,10 @@
 import React, { MouseEvent } from 'react';
 import { Button, ArrowIcon } from './BackButton.styles';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../../hooks/useAppSelector';
 
 export const BackButton = () => {
+  const currentTheme = useAppSelector((state) => state.theme.theme);
   const navigate = useNavigate();
 
   const onBackClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -12,7 +14,7 @@ export const BackButton = () => {
 
   return (
     <Button onClick={onBackClick}>
-      <ArrowIcon />
+      <ArrowIcon currentTheme={currentTheme} />
       Back
     </Button>
   );

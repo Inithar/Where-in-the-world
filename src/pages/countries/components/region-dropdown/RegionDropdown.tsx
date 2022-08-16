@@ -7,6 +7,7 @@ import { setRegion } from '../../../../redux/filteredCountriesSlice';
 export const RegionDropdown = () => {
   const [isActive, setIsActive] = useState(false);
   const region = useAppSelector((state) => state.filteredCountries.region);
+  const currentTheme = useAppSelector((state) => state.theme.theme);
   const dispatch = useAppDispatch();
 
   const handleOpenDropdown = (event: MouseEvent<HTMLDivElement>) => setIsActive(!isActive);
@@ -20,7 +21,7 @@ export const RegionDropdown = () => {
     <Dropdown>
       <Button onClick={handleOpenDropdown}>
         {region}
-        <ArrowIcon />
+        <ArrowIcon currentTheme={currentTheme} />
       </Button>
       {isActive && (
         <Content>
